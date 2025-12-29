@@ -1,0 +1,8 @@
+# Ignore all dotfiles
+.*
+
+# Do not ignore these specific dotfiles
+!.gitignore
+
+# Ignore pychache directories
+__pycache__/
