@@ -69,6 +69,15 @@ class SIPRequest(SIPMessage):
         def __repr__(self) -> str:
             return f"SIPRequest(method={self._method}, uri={self._uri})"
         
+        def start_line(self) -> str:
+            """
+            Generate the start line for the SIP request.
+
+            Returns:
+                str: The start line (e.g., "INVITE sip:user@example.com SIP/2.0").
+            """
+            return f"{self._method} {self._uri} {self._version}"
+        
 class SIPResponse(SIPMessage):
     def __init__(
             self,
@@ -86,7 +95,7 @@ class SIPResponse(SIPMessage):
             status_code (int): The status code of the response.
             reason_phrase (str): The reason phrase associated with the status code.
             headers (dict[str, str]): A dictionary of SIP headers.
-            body (Optional[str]): The body of the SIP message, if any.
+            body (Optional[str]): The body of the SIP message, if any.2
         
         Returns:
             None
@@ -98,3 +107,12 @@ class SIPResponse(SIPMessage):
 
         def __repr__(self) -> str:
             return f"SIPResponse(status_code={self._status_code}, reason_phrase={self._reason_phrase})"
+        
+        def start_line(self) -> str:
+            """
+            Generate the start line for the SIP response.
+
+            Returns:
+                str: The start line (e.g., "SIP/2.0 200 OK").
+            """
+            return f"{self._version} {self._status_code} {self._reason_phrase}"
